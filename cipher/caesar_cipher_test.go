@@ -25,6 +25,7 @@ var _ = Describe("CaesarCipher", func() {
 
 			Expect(encryptedMessage).To(Equal(output))
 		},
+		Entry("when cipher rule is zero", "abcde", 0, "ABCDE"),
 		Entry("when cipher rule does not require go around the alphabet", "abcde", 3, "DEFGH"),
 		Entry("when cipher rule requires going around the alphabet", "vwxyz", 5, "ABCDE"),
 		Entry("when cipher rule requires going around the alphabet any times", "vwxyz", 2600, "VWXYZ"),
