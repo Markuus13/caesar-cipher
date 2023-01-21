@@ -19,13 +19,14 @@ var _ = Describe("CaesarCipher", func() {
 		})
 	})
 
-	When("input message is has a single word", func() {
-		It("returns a string encrypted by given cipher rule", func() {
-			inputMessage := "abcde"
+	DescribeTable("When input message is has a single word",
+		func(inputMessage string, cipherRule int, output string) {
+			encryptedMessage := cipher.CaesarCipher(inputMessage, cipherRule)
 
-			encryptedMessage := cipher.CaesarCipher(inputMessage, 3)
-
-			Expect(encryptedMessage).To(Equal("DEFGH"))
-		})
-	})
+			Expect(encryptedMessage).To(Equal(output))
+		},
+		Entry("when cipher rule does not require go around the alphabet", "abcde", 3, "DEFGH"),
+		Entry("when cipher rule requires going around the alphabet", "vwxyz", 5, "ABCDE"),
+		Entry("when cipher rule requires going around the alphabet any times", "vwxyz", 2600, "VWXYZ"),
+	)
 })
